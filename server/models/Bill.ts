@@ -1,8 +1,25 @@
 import {Model} from "@mean-expert/model";
-/**
- * @module example
- * @description
- **/
+
+
+export interface IBill {
+      name: string;
+      height: string;
+      mass: string;
+      hair_color: string;
+      skin_color: string;
+      eye_color: string;
+      birth_year: string;
+      gender: string;
+      homeworld: string;
+      films: string[];
+      species: string[];
+      vehicles: any[];
+      starships: any[];
+      created: Date;
+      edited: Date;
+      url: string;
+}
+
 @Model({
   hooks: {
     access: {name: 'access', type: 'operation'},
@@ -21,7 +38,6 @@ import {Model} from "@mean-expert/model";
     }
   }
 })
-
 class Bill {
   private connector: any;
   constructor(public model: any) {
@@ -39,13 +55,13 @@ class Bill {
   }
 
   parse(ctx: any, next: any) {
-    var body = ctx.res.body.results.map( (bill: any) => {
+    var body = ctx.res.body.results.map( (bill: IBill) => {
       return {
         name: bill.name,
         gender: bill.gender
       };
     })
-    ctx.end(null, ctx.res, body)
+    ctx.end(null, ctx.res, body);
   }
 
   persist(ctx: any, next: Function): void {
