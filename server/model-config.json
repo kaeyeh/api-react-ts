@@ -45,5 +45,9 @@
   "planet": {
     "dataSource": "ReST",
     "public": true
+  },
+  "member": {
+    "dataSource": "ReST",
+    "public": true
   }
 }
