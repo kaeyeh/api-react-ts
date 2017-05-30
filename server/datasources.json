@@ -1,0 +1,32 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "ReST": {
+    "name": "ReST",
+    "debug": "true",
+    "baseURL": "http://swapi.co/api",
+    "options": {
+      "headers": {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      "strictSSL": false
+    },
+    "operations": [
+      {
+
+        "template": {
+          "method": "GET",
+          "query": {
+            "page": "{page=1:string}"
+          },
+          "responsePath": "$.results[*]"
+        }
+      }
+    ],
+    "crud": true,
+    "connector": "rest"
+  }
+}

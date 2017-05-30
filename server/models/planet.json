@@ -1,0 +1,19 @@
+{
+  "name": "planet",
+  "plural": "planet",
+  "base": "PersistedModel",
+  "resourceName": "planets",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
