@@ -1,4 +1,5 @@
 # api-react-ts
+'''
 npm install @mean-expert/model
 npm install @types/node
 npm install loopback-connector-rest --save
@@ -29,3 +30,4 @@ apic create --type datasource
     ]
   }
 }
+'''
