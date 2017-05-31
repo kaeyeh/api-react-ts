@@ -16,7 +16,6 @@
     },
     "operations": [
       {
-
         "template": {
           "method": "GET",
           "query": {

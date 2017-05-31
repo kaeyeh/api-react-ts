@@ -49,5 +49,9 @@
   "member": {
     "dataSource": "ReST",
     "public": true
+  },
+  "combo": {
+    "dataSource": null,
+    "public": true
   }
 }

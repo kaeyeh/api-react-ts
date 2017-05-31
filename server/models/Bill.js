@@ -5,59 +5,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-exports.__esModule = true;
-var model_1 = require("@mean-expert/model");
-var Bill = (function () {
-    function Bill(model) {
+Object.defineProperty(exports, "__esModule", { value: true });
+const model_1 = require("@mean-expert/model");
+let Bill = class Bill {
+    constructor(model) {
         this.model = model;
     }
-    Bill.prototype.access = function (ctx, next) {
+    access(ctx, next) {
         console.log('example: access');
         if (!this.connector) {
             this.connector = this.model.getDataSource().connector;
             this.connector.observe('after execute', this.parse);
         }
         next();
-    };
-    Bill.prototype.parse = function (ctx, next) {
-        var body = ctx.res.body.results.map(function (bill) {
+    }
+    parse(ctx, next) {
+        var body = ctx.res.body.results.map((bill) => {
             return {
                 name: bill.name,
                 gender: bill.gender
             };
         });
         ctx.end(null, ctx.res, body);
-    };
-    Bill.prototype.persist = function (ctx, next) {
+    }
+    persist(ctx, next) {
         console.log('example: persist');
         next();
-    };
-    Bill.prototype.beforeSave = function (ctx, next) {
+    }
+    beforeSave(ctx, next) {
         console.log('example: before Save');
         next();
-    };
-    Bill.prototype.beforeMyRemote = function (ctx, next) {
+    }
+    beforeMyRemote(ctx, next) {
         console.log('example: before myRemote');
         next();
-    };
-    Bill.prototype.myRemote = function (next) {
+    }
+    myRemote(next) {
         console.log('example: myRemote');
         this.model.find(next);
-    };
-    Bill.prototype.afterMyRemote = function (ctx, next) {
+    }
+    afterMyRemote(ctx, next) {
         console.log('example: after myRemote');
         next();
-    };
-    Bill.prototype.beforeDelete = function (ctx, next) {
+    }
+    beforeDelete(ctx, next) {
         console.log('example: before Delete');
         next();
-    };
-    Bill.prototype.afterDelete = function (ctx, next) {
+    }
+    afterDelete(ctx, next) {
         console.log('example: after Delete');
         next();
-    };
-    return Bill;
-}());
+    }
+};
 Bill = __decorate([
     model_1.Model({
         hooks: {
@@ -68,7 +67,7 @@ Bill = __decorate([
             beforeDelete: { name: 'before delete', type: 'operation' },
             afterDelete: { name: 'after delete', type: 'operation' },
             beforeMyRemote: { name: 'myRemote', type: 'beforeRemote' },
-            afterMyRemote: { name: 'myRemote', type: 'afterRemote' }
+            afterMyRemote: { name: 'myRemote', type: 'afterRemote' },
         },
         remotes: {
             myRemote: {

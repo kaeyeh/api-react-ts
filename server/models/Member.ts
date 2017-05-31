@@ -31,12 +31,13 @@ export interface IBill {
 })
 class Member {
   private connector: any;
+  
   constructor(public model: any) {
 
   }
 
   access(ctx: any, next: Function): void {
-    console.log('example: access');
+  
     if (!this.connector) {
       this.connector = this.model.getDataSource().connector;
       this.connector.observe('after execute', this.parse);

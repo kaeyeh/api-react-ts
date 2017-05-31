@@ -7,34 +7,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const model_1 = require("@mean-expert/model");
-let Member = class Member {
+const _ = require("lodash");
+let Combo = class Combo {
     constructor(model) {
         this.model = model;
+        _.bindAll(this, "find");
+        model.find = this.find;
     }
-    access(ctx, next) {
-        if (!this.connector) {
-            this.connector = this.model.getDataSource().connector;
-            this.connector.observe('after execute', this.parse);
+    find(filter, callback) {
+        if (!this.member) {
+            this.member = this.model.app.models.member;
         }
-        next();
-    }
-    parse(ctx, next) {
-        var body = ctx.res.body.results.map((bill) => {
-            return {
-                name: bill.name,
-                gender: bill.gender
-            };
+        if (!this.planet) {
+            this.planet = this.model.app.models.planet;
+        }
+        var member$ = this.member.find(filter);
+        var planet$ = this.planet.find(filter);
+        Promise.all([member$, planet$]).then((data) => {
+            callback(null, data);
         });
-        ctx.end(null, ctx.res, body);
     }
 };
-Member = __decorate([
+Combo = __decorate([
     model_1.Model({
         hooks: {
             access: { name: 'access', type: 'operation' }
         },
         remotes: {}
     })
-], Member);
-module.exports = Member;
-//# sourceMappingURL=Member.js.map
+], Combo);
+module.exports = Combo;
+//# sourceMappingURL=Combo.js.map
