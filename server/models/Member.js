@@ -7,18 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const model_1 = require("@mean-expert/model");
+var LoopBackContext = require('loopback-context');
 let Member = class Member {
     constructor(model) {
         this.model = model;
     }
     access(ctx, next) {
+        var context = LoopBackContext.getCurrentContext();
         if (!this.connector) {
             this.connector = this.model.getDataSource().connector;
-            this.connector.observe('after execute', this.parse);
+            this.connector.observe('after execute', () => { });
+            this.connector.observe('before execute', this.parse);
         }
         next();
     }
     parse(ctx, next) {
+        var context = LoopBackContext.getCurrentContext();
         var body = ctx.res.body.results.map((bill) => {
             return {
                 name: bill.name,

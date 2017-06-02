@@ -22,7 +22,7 @@ export interface IBill {
 
 @Model({
   hooks: {
-    access: {name: 'access', type: 'operation'},
+    access: {name: 'access', type: 'operation'}, 
     persist: {name: 'persist', type: 'operation'},
     afterSave: {name: 'after save', type: 'operation'},
     beforeSave: {name: 'before save', type: 'operation'},
