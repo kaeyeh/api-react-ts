@@ -47,8 +47,7 @@ class Member {
   
     if (!this.connector) {
       this.connector = this.model.getDataSource().connector;
-      this.connector.observe('after execute', () => {});
-      this.connector.observe('before execute', this.parse);
+      this.connector.observe('after execute', this.parse);
     }
 
     next();
